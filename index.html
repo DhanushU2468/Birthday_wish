@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Happy Birthday 🎉</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="page">
+
+    <!-- Confetti -->
+    <canvas id="confetti"></canvas>
+
+    <div class="card">
+        <h1>🎉 Happy Birthday 🎂</h1>
+        <h2>Dear <span>Ganavi</span> 💖</h2>
+
+        <p id="typing"></p>
+
+        <!-- Cake -->
+        <div class="cake">
+            <div class="candle">
+                <div class="flame"></div>
+            </div>
+        </div>
+
+        <p class="from">
+            — With lots of love,<br>
+            <b>Dhanush</b>
+        </p>
+
+        <button id="wishBtn" onclick="startSurprise()">
+            🎁 Click for Surprise!
+        </button>
+
+        <!-- Music -->
+        <audio id="music">
+            <source src="happy-birthday.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
