@@ -1,0 +1,83 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    width: 360px;
+    text-align: center;
+    border-radius: 15px;
+    z-index: 2;
+}
+
+h1 { color: #ff4081; }
+
+h2 span { color: #673ab7; }
+
+#typing {
+    min-height: 60px;
+    font-size: 16px;
+    color: #444;
+}
+
+/* Cake */
+.cake {
+    width: 120px;
+    height: 60px;
+    background: #ffb347;
+    margin: 20px auto;
+    border-radius: 10px;
+    position: relative;
+}
+
+.candle {
+    width: 10px;
+    height: 30px;
+    background: white;
+    position: absolute;
+    top: -30px;
+    left: 55px;
+}
+
+.flame {
+    width: 12px;
+    height: 12px;
+    background: orange;
+    border-radius: 50%;
+    position: absolute;
+    top: -12px;
+    left: -1px;
+    animation: flicker 0.2s infinite;
+}
+
+@keyframes flicker {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #ff4081;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/* Confetti */
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
