@@ -19,9 +19,19 @@ window.addEventListener('load', () => {
 function setupCandles() {
     const candles = document.querySelectorAll('.candle');
     candles.forEach((candle, index) => {
-        candle.addEventListener('click', function() {
+        // Support both click and touch events
+        candle.addEventListener('click', function(e) {
+            e.preventDefault();
             blowCandle(this);
         });
+        
+        candle.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            blowCandle(this);
+        });
+        
+        // Add visual feedback on hover/touch
+        candle.style.cursor = 'pointer';
     });
 }
 
@@ -80,15 +90,17 @@ function createMagicSparkles() {
     const sparkles = ['✨', '⭐', '💫', '🌟'];
     const cake = document.querySelector('.cake');
     const rect = cake.getBoundingClientRect();
+    const isMobile = window.innerWidth < 768;
+    const sparkleCount = isMobile ? 10 : 15;
     
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < sparkleCount; i++) {
         setTimeout(() => {
             const sparkle = document.createElement('div');
             sparkle.innerHTML = sparkles[Math.floor(Math.random() * sparkles.length)];
             sparkle.style.position = 'fixed';
             sparkle.style.left = (rect.left + Math.random() * rect.width) + 'px';
             sparkle.style.top = (rect.top + Math.random() * rect.height) + 'px';
-            sparkle.style.fontSize = '20px';
+            sparkle.style.fontSize = (isMobile ? 16 : 20) + 'px';
             sparkle.style.zIndex = '1000';
             sparkle.style.pointerEvents = 'none';
             sparkle.style.animation = 'sparkleExplode 1s ease-out forwards';
@@ -170,8 +182,10 @@ function startSurprise() {
 function createBalloons() {
     const colors = ['#ff6b9d', '#c44569', '#f8b500', '#48dbfb', '#0abde3', '#ee5a6f'];
     const container = document.getElementById('balloons');
+    const isMobile = window.innerWidth < 768;
+    const balloonCount = isMobile ? 5 : 8;
     
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < balloonCount; i++) {
         const balloon = document.createElement('div');
         balloon.className = 'balloon';
         balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
@@ -186,23 +200,27 @@ function createBalloons() {
 function startHearts() {
     const heartsContainer = document.getElementById('hearts');
     const heartSymbols = ['❤️', '💖', '💕', '💗', '💝', '💘'];
+    const isMobile = window.innerWidth < 768;
+    const heartInterval = isMobile ? 600 : 300;
     
     setInterval(() => {
         const heart = document.createElement('div');
         heart.className = 'heart';
         heart.innerHTML = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
         heart.style.left = Math.random() * 100 + '%';
-        heart.style.fontSize = (15 + Math.random() * 15) + 'px';
+        heart.style.fontSize = (isMobile ? 12 : 15) + Math.random() * (isMobile ? 10 : 15) + 'px';
         heart.style.animationDuration = (4 + Math.random() * 3) + 's';
         heartsContainer.appendChild(heart);
         
         setTimeout(() => heart.remove(), 7000);
-    }, 300);
+    }, heartInterval);
 }
 
 // Fireworks effect
 function startFireworks() {
     const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ff6b6b', '#4ecdc4'];
+    const isMobile = window.innerWidth < 768;
+    const fireworkInterval = isMobile ? 2000 : 1000;
     
     setInterval(() => {
         createFirework(
@@ -210,25 +228,27 @@ function startFireworks() {
             Math.random() * window.innerHeight * 0.5,
             colors[Math.floor(Math.random() * colors.length)]
         );
-    }, 1000);
+    }, fireworkInterval);
 }
 
 function createFirework(x, y, color) {
-    const particles = 30;
+    const isMobile = window.innerWidth < 768;
+    const particles = isMobile ? 20 : 30;
+    
     for (let i = 0; i < particles; i++) {
         const particle = document.createElement('div');
         particle.style.position = 'fixed';
         particle.style.left = x + 'px';
         particle.style.top = y + 'px';
-        particle.style.width = '4px';
-        particle.style.height = '4px';
+        particle.style.width = (isMobile ? 3 : 4) + 'px';
+        particle.style.height = (isMobile ? 3 : 4) + 'px';
         particle.style.borderRadius = '50%';
         particle.style.background = color;
         particle.style.pointerEvents = 'none';
         particle.style.zIndex = '999';
         
         const angle = (Math.PI * 2 * i) / particles;
-        const velocity = 2 + Math.random() * 2;
+        const velocity = (isMobile ? 1.5 : 2) + Math.random() * 2;
         const vx = Math.cos(angle) * velocity;
         const vy = Math.sin(angle) * velocity;
         
@@ -277,12 +297,16 @@ function startConfetti() {
     if (confettiActive) return;
     confettiActive = true;
     
-    // Create more confetti pieces
-    for (let i = 0; i < 300; i++) {
+    // Adjust confetti count based on screen size
+    const isMobile = window.innerWidth < 768;
+    const confettiCount = isMobile ? 150 : 300;
+    
+    // Create confetti pieces
+    for (let i = 0; i < confettiCount; i++) {
         confetti.push({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height - canvas.height,
-            r: Math.random() * 5 + 2,
+            r: Math.random() * (isMobile ? 3 : 5) + 2,
             d: Math.random() * 5 + 2,
             color: `hsl(${Math.random()*360}, 100%, 60%)`,
             tilt: Math.random() * 10 - 5,
