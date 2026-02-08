@@ -130,9 +130,10 @@ function startSurprise() {
     btn.querySelector('.btn-text').innerText = "🎉 Enjoy Your Special Day!";
     btn.style.animation = 'none';
 
-    // Play music
-    const music = document.getElementById("music");
-    music.play().catch(e => console.log("Music autoplay prevented"));
+    // Play Happy Birthday melody
+    setTimeout(() => {
+        playHappyBirthdayMelody();
+    }, 500);
 
     // Change background with smooth transition
     const page = document.getElementById("page");
@@ -336,3 +337,73 @@ celebrateStyle.textContent = `
     }
 `;
 document.head.appendChild(celebrateStyle);
+
+// Happy Birthday Melody using Web Audio API
+function playHappyBirthdayMelody() {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return;
+    
+    const audioContext = new AudioContext();
+    
+    // Happy Birthday melody (simplified version)
+    // Note frequencies: C4=261.63, D4=293.66, E4=329.63, F4=349.23, G4=392.00, A4=440.00, B4=493.88, C5=523.25
+    const melody = [
+        { note: 392.00, duration: 0.5 },  // G4 - Hap-
+        { note: 392.00, duration: 0.5 },  // G4 - py
+        { note: 440.00, duration: 1.0 },  // A4 - birth-
+        { note: 392.00, duration: 1.0 },  // G4 - day
+        { note: 523.25, duration: 1.0 },  // C5 - to
+        { note: 493.88, duration: 2.0 },  // B4 - you
+        
+        { note: 392.00, duration: 0.5 },  // G4 - Hap-
+        { note: 392.00, duration: 0.5 },  // G4 - py
+        { note: 440.00, duration: 1.0 },  // A4 - birth-
+        { note: 392.00, duration: 1.0 },  // G4 - day
+        { note: 587.33, duration: 1.0 },  // D5 - to
+        { note: 523.25, duration: 2.0 },  // C5 - you
+        
+        { note: 392.00, duration: 0.5 },  // G4 - Hap-
+        { note: 392.00, duration: 0.5 },  // G4 - py
+        { note: 783.99, duration: 1.0 },  // G5 - birth-
+        { note: 659.25, duration: 1.0 },  // E5 - day
+        { note: 523.25, duration: 1.0 },  // C5 - dear
+        { note: 493.88, duration: 1.0 },  // B4 - Ga-
+        { note: 440.00, duration: 2.0 },  // A4 - na-vi
+        
+        { note: 698.46, duration: 0.5 },  // F5 - Hap-
+        { note: 698.46, duration: 0.5 },  // F5 - py
+        { note: 659.25, duration: 1.0 },  // E5 - birth-
+        { note: 523.25, duration: 1.0 },  // C5 - day
+        { note: 587.33, duration: 1.0 },  // D5 - to
+        { note: 523.25, duration: 2.0 },  // C5 - you!
+    ];
+    
+    let startTime = audioContext.currentTime;
+    
+    melody.forEach(({ note, duration }) => {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.value = note;
+        oscillator.type = 'sine';
+        
+        gainNode.gain.setValueAtTime(0, startTime);
+        gainNode.gain.linearRampToValueAtTime(0.3, startTime + 0.01);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, startTime + duration);
+        
+        oscillator.start(startTime);
+        oscillator.stop(startTime + duration);
+        
+        startTime += duration;
+    });
+    
+    // Loop the melody
+    setTimeout(() => {
+        if (surpriseActivated) {
+            playHappyBirthdayMelody();
+        }
+    }, startTime * 1000);
+}
