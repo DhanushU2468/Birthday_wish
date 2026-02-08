@@ -2,41 +2,97 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Happy Birthday 🎉</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Ganavi 🎉</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body id="page">
 
-    <!-- Confetti -->
+    <!-- Animated Background Elements -->
+    <div class="stars"></div>
+    <div class="balloons-container" id="balloons"></div>
+    
+    <!-- Confetti Canvas -->
     <canvas id="confetti"></canvas>
 
-    <div class="card">
-        <h1>🎉 Happy Birthday 🎂</h1>
-        <h2>Dear <span>Ganavi</span> 💖</h2>
+    <!-- Main Card -->
+    <div class="card" id="mainCard">
+        <!-- Decorative Elements -->
+        <div class="sparkle sparkle-1">✨</div>
+        <div class="sparkle sparkle-2">⭐</div>
+        <div class="sparkle sparkle-3">💫</div>
+        <div class="sparkle sparkle-4">✨</div>
+        
+        <div class="card-header">
+            <h1 class="title-animate">🎉 Happy Birthday 🎂</h1>
+            <h2>Dear <span class="name-highlight">Ganavi</span> 💖</h2>
+        </div>
 
-        <p id="typing"></p>
+        <div class="message-container">
+            <p id="typing" class="typing-text"></p>
+        </div>
 
-        <!-- Cake -->
-        <div class="cake">
-            <div class="candle">
-                <div class="flame"></div>
+        <!-- Enhanced Cake with Multiple Candles -->
+        <div class="cake-container">
+            <div class="cake">
+                <div class="cake-layer layer-top">
+                    <div class="candle candle-1">
+                        <div class="flame"></div>
+                    </div>
+                    <div class="candle candle-2">
+                        <div class="flame"></div>
+                    </div>
+                    <div class="candle candle-3">
+                        <div class="flame"></div>
+                    </div>
+                </div>
+                <div class="cake-layer layer-middle"></div>
+                <div class="cake-layer layer-bottom"></div>
+                <div class="cake-plate"></div>
+            </div>
+            <p class="cake-instruction" id="cakeInstruction">🎂 Blow the candles! (Click on them)</p>
+        </div>
+
+        <!-- Wishes Section -->
+        <div class="wishes-section" id="wishesSection">
+            <div class="wish-card">
+                <span class="wish-icon">🌟</span>
+                <p>May all your dreams come true!</p>
+            </div>
+            <div class="wish-card">
+                <span class="wish-icon">🎁</span>
+                <p>Amazing surprises await you!</p>
+            </div>
+            <div class="wish-card">
+                <span class="wish-icon">💝</span>
+                <p>Love, joy & endless happiness!</p>
             </div>
         </div>
 
         <p class="from">
-            — With lots of love,<br>
-            
+            — With lots of love 💕<br>
+            <span class="sender-name">From your loved ones</span>
         </p>
 
-        <button id="wishBtn" onclick="startSurprise()">
-            🎁 Click for Surprise!
+        <button id="wishBtn" class="surprise-btn" onclick="startSurprise()">
+            <span class="btn-text">🎁 Click for Surprise!</span>
+            <span class="btn-shine"></span>
         </button>
 
-        <!-- Music -->
-        <audio id="music">
+        <!-- Hidden surprise message -->
+        <div class="surprise-message" id="surpriseMessage">
+            <h3>🎊 Special Birthday Wishes! 🎊</h3>
+            <p>You deserve all the happiness in the world! 🌈</p>
+        </div>
+
+        <!-- Music Player -->
+        <audio id="music" loop>
             <source src="happy-birthday.mp3" type="audio/mpeg">
         </audio>
     </div>
+
+    <!-- Floating Hearts -->
+    <div class="hearts-container" id="hearts"></div>
 
     <script src="script.js"></script>
 </body>
