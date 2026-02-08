@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -12,9 +13,11 @@ body {
     align-items: center;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: auto;
     position: relative;
     transition: background 1s ease;
+    padding: 20px 0;
 }
 
 /* Animated Stars Background */
@@ -469,6 +472,7 @@ canvas {
     left: 0;
     pointer-events: none;
     z-index: 1;
+    overflow: hidden;
 }
 
 .balloon {
@@ -478,6 +482,20 @@ canvas {
     border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
     animation: float 8s infinite ease-in-out;
     opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .balloon {
+        width: 35px;
+        height: 45px;
+    }
+}
+
+@media (max-width: 480px) {
+    .balloon {
+        width: 25px;
+        height: 35px;
+    }
 }
 
 .balloon::before {
@@ -517,6 +535,18 @@ canvas {
     opacity: 0;
 }
 
+@media (max-width: 768px) {
+    .heart {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .heart {
+        font-size: 14px;
+    }
+}
+
 @keyframes heartFloat {
     0% {
         transform: translateY(100vh) rotate(0deg);
@@ -535,24 +565,239 @@ canvas {
 }
 
 /* Responsive Design */
-@media (max-width: 500px) {
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
     .card {
-        padding: 30px 25px;
+        padding: 25px 20px;
+        max-width: 100%;
+        width: 95%;
+        margin: 10px;
     }
     
     h1 {
-        font-size: 2em;
+        font-size: 1.8em;
+        margin-bottom: 8px;
     }
     
     h2 {
-        font-size: 1.3em;
+        font-size: 1.2em;
+    }
+    
+    .name-highlight {
+        font-size: 1.1em;
     }
     
     .message-container {
         padding: 15px;
+        min-height: 60px;
     }
     
     #typing {
-        font-size: 15px;
+        font-size: 14px;
+    }
+    
+    /* Adjust sparkles for mobile */
+    .sparkle {
+        font-size: 18px;
+    }
+    
+    .sparkle-1 { top: -15px; left: 10px; }
+    .sparkle-2 { top: -10px; right: 15px; }
+    .sparkle-3 { bottom: -5px; left: 15px; }
+    .sparkle-4 { bottom: -10px; right: 10px; }
+    
+    /* Cake adjustments */
+    .cake {
+        width: 120px;
+    }
+    
+    .layer-top {
+        width: 80px;
+        height: 35px;
+    }
+    
+    .layer-middle {
+        width: 100px;
+        height: 40px;
+    }
+    
+    .layer-bottom {
+        width: 120px;
+        height: 45px;
+    }
+    
+    .cake-plate {
+        width: 130px;
+    }
+    
+    .candle {
+        width: 6px;
+        height: 30px;
+    }
+    
+    .candle-1 { left: 20px; }
+    .candle-2 { left: 37px; }
+    .candle-3 { left: 54px; }
+    
+    .flame {
+        width: 10px;
+        height: 15px;
+        top: -15px;
+        left: -2px;
+    }
+    
+    .cake-instruction {
+        font-size: 12px;
+        margin-top: 10px;
+    }
+    
+    /* Wishes section */
+    .wish-card {
+        padding: 12px;
+        font-size: 13px;
+    }
+    
+    .wish-icon {
+        font-size: 20px;
+    }
+    
+    .wish-card p {
+        font-size: 13px;
+    }
+    
+    /* Button */
+    .surprise-btn {
+        padding: 12px 25px;
+        font-size: 14px;
+        width: 90%;
+        max-width: 280px;
+    }
+    
+    /* From section */
+    .from {
+        font-size: 14px;
+        margin: 20px 0 15px;
+    }
+    
+    /* Surprise message */
+    .surprise-message {
+        padding: 15px;
+    }
+    
+    .surprise-message h3 {
+        font-size: 16px;
+    }
+    
+    .surprise-message p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        padding: 20px 15px;
+    }
+    
+    h1 {
+        font-size: 1.5em;
+    }
+    
+    h2 {
+        font-size: 1.1em;
+    }
+    
+    .name-highlight {
+        font-size: 1em;
+    }
+    
+    #typing {
+        font-size: 13px;
+    }
+    
+    .message-container {
+        padding: 12px;
+        min-height: 50px;
+    }
+    
+    /* Smaller cake for very small screens */
+    .cake {
+        width: 100px;
+    }
+    
+    .layer-top {
+        width: 70px;
+        height: 30px;
+    }
+    
+    .layer-middle {
+        width: 85px;
+        height: 35px;
+    }
+    
+    .layer-bottom {
+        width: 100px;
+        height: 40px;
+    }
+    
+    .cake-plate {
+        width: 110px;
+    }
+    
+    .candle {
+        width: 5px;
+        height: 25px;
+    }
+    
+    .candle-1 { left: 18px; }
+    .candle-2 { left: 32.5px; }
+    .candle-3 { left: 47px; }
+    
+    .flame {
+        width: 8px;
+        height: 12px;
+        top: -12px;
+        left: -1.5px;
+    }
+    
+    .wish-card {
+        padding: 10px;
+    }
+    
+    .wish-icon {
+        font-size: 18px;
+    }
+    
+    .wish-card p {
+        font-size: 12px;
+    }
+    
+    .surprise-btn {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+    
+    .from {
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 360px) {
+    h1 {
+        font-size: 1.3em;
+    }
+    
+    h2 {
+        font-size: 1em;
+    }
+    
+    .card {
+        padding: 15px 12px;
+    }
+    
+    .sparkle {
+        font-size: 16px;
     }
 }
